@@ -1,0 +1,270 @@
+\PassOptionsToPackage{table, dvipsnames}{xcolor}
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{geometry}
+%\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+%\usepackage{flafter}
+\usepackage{enumitem}
+\usepackage{xcolor}
+%\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage[ruled, noend]{algorithm2e}
+
+
+    \title{\textbf{Turnover Modulates the Need for a Cost of Resistance in Adaptive Therapy}}
+    \date{21 June 2023}
+    \geometry{
+  	left=3.5cm,
+  	right=3.5cm,
+    }
+    \addtolength{\topmargin}{-1cm}
+    \addtolength{\textheight}{2.5cm}
+    %\textwidth13.5cm
+    %\textwidth14cm
+    \setlength{\parindent}{0pt}
+
+
+\begin{document}
+
+
+ \textbf{Introduction}
+
+ \vspace{1mm}
+
+
+Administration of  cytotoxic drugs is the main way to contrast tumor growth. However, perturbation of the tumor promotes adaptation and evolution of resistance, which lowers the benefit of therapy. In order to adapt to the drug, tumor cells use up energy that would be needed to proliferate. That is to say, the resistant cells may pay a cost of resistance. In adaptive therapy, drugs are administered following a specific schedule so that non-resistant cells compete with the resistant population.                                                                        
+The aim of this report is to investigate how cancer turnover rate, cost of resistance and other factors impact on the success of adaptive therapy. The analysis and discussion are based on two complementary studies on the matter.
+
+ \vspace{2mm}
+
+ \textbf{ODE Model}
+
+  \vspace{1mm}
+Tumors are \textbf{heterogeneous} populations of cells with differential responses to drugs, indicating a degree of preexisting \textbf{resistance} in most tumours. 
+
+To model this heterogeneity, two competing cell types are assumed. Cells that are sensitive and cells that are fully resistant to a drug.
+In this model both types of cell populations are assumed to grow logistically by themselves and compete for resources among each other.
+
+This variant of the Lotka-Volterra model assumes that the presence of the competitor reduces the population’s growth rate in a fashion that is \textbf{linearly proportional}
+to the competitors population density. Under therapy a fraction $d_D$ of sensitive cells die during mitosis, reducing the population growth two-fold:
+The cell that attempted the mitosis is lost and the offspring it could have produced dies with it.
+These considerations produce the following ODE's
+		
+	%\text{Governing ODE's}
+	\begin{align*}	
+		\color{teal} \frac{d\textbf{S}}{dt} = & \color{teal}
+			r_S \left(1-\frac{\textbf{S}+\textbf{R}}{K} \right)
+			\overbrace{\left(1 - \frac{2d_D}{D_{max}} D(t)\right) }^\text{Drug induced reduction term} \textbf{S}
+			- d_T \textbf{S} \\
+		\color{purple} \frac{d\textbf{R}}{dt} = & \color{purple}
+			\underbrace{ r_R \left(1-\frac{\textbf{R} + \textbf{S}}{K} \right) \textbf{R} }_\text{logistic growth term}
+			 - d_T \textbf{R} 
+	\end{align*}
+
+where $K$ represents the \underline{environmental carrying capacity}, $\color{teal}{r_S}$ and $\color{purple}{r_R}$ the respective \underline{proliferation rates},
+$d_T$ the density - independent \underline{turnover rate} and $\textbf{D}(t)$ the current drug schedule. 
+The assumption is that the cost of resistance manifests itself solely in the growth rate $\color{purple}{r_R}$ of the resistent cells. 
+
+The adaptive therapy schedule was binary at either complete withdrawal or maximum tolerable dose and dependent on the size $\textcolor{NavyBlue}{\textbf{N}}$ of the tumour
+
+\[
+	\textcolor{NavyBlue}{\textbf{N}(t)}  =   \textcolor{teal}{\textbf{S}(t)}  +  \textcolor{purple}{\textbf{R}(t)}
+\]
+
+The drug was given until the tumour shrunk to half of its original size $\frac{1}{2} \textcolor{NavyBlue}{\textbf{N}_0}$, and restarted once the tumour reached original size again.
+Simulation was performed until the tumour grew to a size of $1.2  \textcolor{NavyBlue}{\textbf{N}_0}$. \\
+		
+
+ \vspace{2mm}
+
+ \textbf{Results of the ODE Model}
+
+  \vspace{1mm}
+
+
+The parameters of the model were adapted from prostate cancer literature but its applicability is not limited to it. In the following, we define the main results of the simulations.
+First, the researchers investigated the effects of initial density $n_0$ and resistant cells fraction $f_R$, neglecting turnover and cost of resistance, which were therefore set to 0.
+This initial analysis showed that TTP is maximized as the initial $f_R$ is at its lowest (0.1\%) and the $n_0$ closer to the environmental carrying capacity (75\%).
+In contrast, when $f_R$ is high, there was no improvement in the simulated adaptive approach and no treatment withdrawal was triggered.
+Afterwards, a cost of resistance of 30\% affecting the resistant cells proliferation rate was included. As expected, this caused slower progression of the tumor and higher improvements in the TTP occurred with the same tumor composition as before.
+When turnover rate was finally set to 10\%, tumor density appeared to shift downwards and the shift increased greatly as the rate rose up to 50\%. Hence the modulatory effect of turnover on the impact of the cost.
+In addition to this, with the usual $n_0$ and $f_R$ values, the resistant cells eventually tended to go extinct. In order to test their model, the researchers fitted it on data from prostate cancer patients undergoing androgen deprivation therapy.
+The lower and upper PSA (prostate specific antigen)  limits for drug administration schedule were respectively 4 and 10 $\mu$g/L. 
+The fitting performance was assessed using the Akaike infomation criterion (AIC). The model proved to fit well for both patients who continuously respond and for those who relapse. 
+The lowest AIC was reached when both turnover rate and cost of resistance were included in the model.
+Moreover, the researchers found out that differences in fitted $d_T$ and cost of resistance values among the patients can predict relapse, as relapsing patients tended to have a lower level of cost than non-relapsing patients who showed a similar turnover rate percentage. \\
+
+
+ \vspace{2mm}
+
+\textbf{Stochastic Agent Based Model}
+
+ \vspace{1mm}
+ 
+On a 2D lattice the development of the two populations is modelled via \textbf{stochastic simulation}.
+Cells now occupy \textbf{space on the lattice}, which replaces the \textbf{environmental carrying capacity} from earlier as competition resource.
+The following algorithm represents the procedure that happens at each iteration time-step $\delta t$.
+Unterstand $\textcolor{darkgray}{u \sim \mathcal{U}(0,1)}$ to be regenerated independently whenever used.
+
+
+\NoCaptionOfAlgo
+\begin{algorithm}[H]
+
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwComment{Comment}{$\triangleright$\ }{}
+\SetAlCapSkip{1em}
+\SetAlCapNameFnt{\normalfont\normalsize}
+%\TitleOfAlgo{Timestep $\textcolor{darkgray}{t \to t + \delta t}$}
+\caption{Timestep $\textcolor{darkgray}{t \to t + \delta t}$}
+
+Shuffle cell list\;
+\For{c in \texttt{cells}}{
+    $
+    \textcolor{darkgray}{r_c} :=
+    \begin{cases*}
+        \color{teal}{r_S} &\text{if c is sensitive} \\
+        \color{purple}{r_R} &\text{if c is resistent}\\
+    \end{cases*}$\;
+    Total propensity $\textcolor{darkgray}{p := (r_c + d_T) \delta t}$\;
+    \uIf{$\textcolor{Purple}{u < p}$}{ \tcp{cell active}
+        \uIf{$\textcolor{Purple}{u < \frac{r_c \delta t}{p}}$}{
+            \texttt{AttemptProliferation}\;
+        }
+        \Else{
+            \texttt{Death}\;
+        }
+    } 
+    \Else{  \tcp{cell inactive}
+        \texttt{continue}\;
+    }
+}
+\end{algorithm}
+
+During the proliferation attempt a sensitive cell may then randomly die, depending on the drug schedule. If a cell passes this check or is resistant it will proliferate
+ to a free Von-Neumann neighbour tile. If no free tile exists the cell will become inactive. \\
+
+
+\vspace{2mm}
+
+\textbf{Results of Agent Based Model}
+
+ \vspace{1mm}
+
+The resistant cells were initially assumed to be uniformly distributed and later as one and then two separated clusters. Contrarily to the researchers’ expectations, as the nests were seeded further apart,
+the TTP gained in the presence of turnover lowers. 
+The two models performance was compared, both in presence and absence of turnover. Although the ABM performed slightly better in terms of TTP without turnover, for a 30\% turnover rate the difference between CT and AT was visibly higher in the ODE model.
+The impact of turnover is reduced because in the ABM each cell can divide into four potential sites, which allows for more divisions to take place at high cell density than predicted by the ODE model.
+On the one hand, turnover limits a cell’s lifespan, so the number of opportunities it has to divide. But on the other hand, death of neighbors opens up space for more divisions. \\
+
+ \vspace{2mm}
+
+\textbf{Discussion}
+
+ \vspace{1mm}
+
+For 15 out of the 67 pre-selected patients no satisfactory fit could be obtained in the ODE model and they were excluded from further analysis. 
+Furthermore there was no separation between test- and training-data during the fitting process. 
+The researchers used the entire time-series dataset and did not attempt to make predictions that could demonstrate the accuracy of the model.
+Although the model is designed primarily to explain the impact of the parameters, this still poses a problem, 
+as explanations derived from an inadequate model do not offer accurate insight.
+Another issue is that fitting multiple parameters on the basis of a cost function with optimisation algorithms can provide a good fit,
+but nevertheless miss-represent the intuition we have for them. \\
+
+Also, due to simplification, the researchers made limiting assumptions.
+First of all, the tumor was assumed to be not curable, and this leads to bias towards adaptive therapy: in fact, if the tumor mass cannot be eradicated AT will always result as the better method, while a continuous approach could be scheduled afterwards in case the patient responds well.
+Secondly, the cells were pre-classified as completely sensitive/resistant and there was no modelling of resistance ariseal, which is actually a multistep process occurring through different mechanisms.
+Furthermore, health risks of keeping the tumor burden close to carrying capacity, such as renewed resistance acquisition and insurgence of metastasis were ignored. \\
+
+\vspace{2mm}
+
+\textbf{Outlook}
+
+ \vspace{1mm}
+
+\underline{Under the assumption} that the suggested models approximate underlying reality to a sufficient degree,
+they could be used in practice to educate decision making and improve adaptive therapy regimens.
+
+As making a decision between adaptive or continuous therapy is not easy it could be helpful to have circumstances established
+ in which adaptive therapy will likely deliver positive results and vice versa, circumstances which require alternative approaches. 
+ A model like this could provide predictions that direct the design of treatment schedules and establish adequate transition timings to other forms of therapy. 
+ 
+ At the same time a succinctly precise model allows to improve therapy in progress. It can give health professionals an idea as to how to shape the internal environment
+of the patient to maximise therapeutic success. Perhaps mechanisms that create an overall unfavourable environment for the cells could be leveraged
+to increase turnover, withdrawal of glucose or reduction of vascularisation could help promote competition
+and the use of drugs known to require energy intensive resistance mechanisms could maximise the cost of resistance.\\
+
+\begin{align*}
+	\textbf{D}(t) =
+	\begin{cases}
+		\textbf{D}_{max} \quad &\text{if} \quad \textcolor{NavyBlue}{\textbf{N}(t)} \geq \frac{1}{2} \textcolor{NavyBlue}{\textbf{N}_0} \\
+		0   \quad &\text{if}  \quad \textcolor{NavyBlue}{\textbf{N}(t)} < \frac{1}{2} \textcolor{NavyBlue}{\textbf{N}_0} \\
+	\end{cases}
+\end{align*}
+
+
+
+
+\[
+	\text{Governing ODE's}
+	\begin{dcases*}	
+		\color{teal} \frac{d\textbf{S}}{dt} = 
+			r_S \left(1-\frac{\textbf{S}+\textbf{R}}{K} \right)
+			\overbrace{\left(1 - \frac{2d_D}{D_{max}} D(t)\right) }^\text{Drug induced reduction term} \textbf{S}
+			- d_T \textbf{S} \\
+		\\
+		\color{purple} \frac{d\textbf{R}}{dt} = 
+			\underbrace{ r_R \left(1-\frac{\textbf{R} + \textbf{S}}{K} \right) \textbf{R} }_\text{logistic growth term}
+			 - d_T \textbf{R}	\\
+	\end{dcases*}
+\]
+
+\vspace{2mm}
+
+\textbf{Authors Contributions}
+
+ \vspace{1mm}
+
+Matteo Zannini: Introduction, Results of the ODE Model, Results of Agent Based Model, Second part of the discussion \\ 
+
+Manuel Günther: Setup, ODE Model, Stochastic Agent Based Model, First part of the discussion, Outlook \\
+
+The parts of the presentation were split as presented.
+\vspace{10mm}
+
+\textbf{References}
+
+\vspace{1.5mm}
+
+Turnover Modulates the Need for a Cost of Resistance in
+Adaptive Therapy. Maximilian A.R. Strobl, Jeffrey West, Yannick Viossat, Mehdi Damaghi, Mark Robertson-Tessi,
+Joel S. Brown, Robert A. Gatenby, Philip K. Maini, Alexander R.A. Anderson. Cancer Research, 2021, doi: 10.1158/0008-5472.CAN-20-0806
+
+\vspace{2mm}
+
+Adaptive Therapy. Robert A. Gatenby,
+Ariosto S. Silva,
+Robert J. Gillies,
+and B. Roy Frieden. Mathematical Oncology, 2009, doi: 10.1158/0008-5472.CAN-08-3658
+ 
+ \vspace{2mm}
+
+ A change of strategy in the war on cancer. Robert A. Gatenby, Nature, 2009
+ 
+ \vspace{2mm}
+
+Spatial structure impacts adaptive therapy by
+shaping intra-tumoral competition, Communications 
+medicine, Maximilian A. R. Strobl, Jill Gallaher, 
+Jeffrey West, Mark Robertson-Tessi,Philip K. Maini,
+Alexander R. A. Anderson, 2022,
+doi.org/10.1038/s43856-022-00110-x
+
+
+\end{document}

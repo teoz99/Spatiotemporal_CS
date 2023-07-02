@@ -1,0 +1,96 @@
+\definecolor{myblue}{cmyk}{1,.72,0,.38}
+
+
+
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+
+\colorlet{circle edge}{myblue}
+\colorlet{circle area}{myblue!5}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}}
+
+
+%Own Operators----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+
+%Own Commands----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%1. Inequality in set: ieset
+%Default: lhs is tau
+\newcommand{\ieset}[2][\tau]{\{#1 \le #2\}} 
+%Example: to get {X <= t} use this expression $\ieset[X]{t}$
+
+%2. Conditional Expectation for Sigma Algebra: scEx
+%Default: sigma Algebra is F_n
+\newcommand{\scEx}[2][n]{E[#2 \mid \mathfrak{F}_#1]}
+%Example: to get E[ X | F_tau ] use this expression $\scEx[\tau]{X}$
+
+%3. In curly brackets: icb
+\newcommand{\icb}[1]{\{ #1 \}}
+%Example: to get {a = b} use this expression $\icb{a = b}
+
+%4. Norm: norm
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+%Example: to get ||X|| use the expression \norm{X}
+
+%5. Column Vector
+\newcommand*\colvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+%Example: \colvec{a \\ b} gives vector (a,b) transposed.
+
+%6.Row Vector
+\newcommand{\rvec}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+%Example: \rvect{a & b} gives vector (a,b)
+
+
+
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+
+\everymath\expandafter{\the\everymath \color{myblue}}
+
+
+\renewcommand{\baselinestretch}{.8}
+\pagestyle{empty}
+
+
+\global\mdfdefinestyle{header}{%
+linecolor=gray,linewidth=1pt,%
+leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
+}
+
+
+\newcommand{\header}{
+\begin{mdframed}[style=header]
+\footnotesize
+\sffamily
+Cheat Sheet\\
+Page \thepage
+\end{mdframed}
+}
+
+
+\makeatletter % Author: https://tex.stackexchange.com/questions/218587/how-to-set-one-header-for-each-page-using-multicols
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\color{myblue}\sffamily\small\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\sffamily\bfseries}}
+
+
+
+
+\makeatother
+\setlength{\parindent}{0pt}
+
+
+
+

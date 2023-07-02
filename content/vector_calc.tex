@@ -1,0 +1,216 @@
+\section{Vector Calculus}
+
+\subsection*{Scalar Fields}
+$f : \mathbb{R}^n \to \mathbb{R}$
+
+\subsection*{Vector Fields}
+$\ul{v} : \mathbb{R}^n \to \mathbb{R}^m$
+
+\subsection*{Differentiation of Vector Fields}
+Let $\ul{a}, \ul{b}, \ul{c}$ be vector fields and $\varphi$ be a scalar field, then
+\begin{align*}
+	\frac{d}{dt} (\varphi \ul{a})= & \frac{d\varphi}{dt}  \ul{a}+ \varphi \frac{d\ul{a}}{dt}\\
+	\frac{d}{dt} (\ul{a} \cdot \ul{b})= &  \frac{d\ul{a}}{dt} \cdot \ul{b} +  \ul{a} \cdot \frac{d\ul{b}}{dt}\\
+	\frac{d}{dt} (\ul{a} \times \ul{b})= &  \frac{d\ul{a}}{dt} \times \ul{b} +  \ul{a} \times \frac{d\ul{b}}{dt} \\
+	\frac{d}{dt} ( \ul{a}(\varphi(t) ) )= & \frac{d\ul{a}}{d\varphi} \frac{d\varphi}{dt} \\
+\end{align*}
+
+
+\subsection*{Differential Operators}
+For a scalar field $f : \mathbb{R}^n \to \mathbb{R}, \ul{x} \mapsto f(\ul{x})$ the gradient is
+\[
+	\text{grad } f(\ul{x})  = \colvec{ \frac{\del f}{\del x_1} \\ \vdots \\ \frac{\del f}{\del x_n} } 
+\]
+and gives the direction of \ul{steepest ascent}
+
+
+For a vector field $\ul{v} : \mathbb{R}^n \to \mathbb{R}^n$ the divergence is defined as 
+\[
+	\text{div } \ul{v}(\ul{x}) = \sum_{j=1}^n \frac{\del v_j}{\del x_j}(\ul{x})
+\]
+and gives the \ul{source density} at a point
+
+For a vector field $\ul{v} : \mathbb{R}^3 \to \mathbb{R}^3$ the curl is defined as 
+\[
+	\text{curl }(\ul{v}(x,y,z)) = \colvec{ \frac{\del v_3}{\del y} - \frac{\del v_2}{\del z} \\
+						 \frac{\del v_1}{\del z} - \frac{\del v_3}{\del x}  \\
+						 \frac{\del v_2}{\del x}  - \frac{\del v_1}{\del y} }
+\]
+and gives the \ul{vortex strength}
+
+
+The Laplace operator for a scalar field $f : \mathbb{R}^n \to \mathbb{R}, \ul{x} \mapsto f(\ul{x})$ gives
+\[
+	\Delta f(\ul{x})  = \nabla \cdot \nabla f(\ul{x}) = \sum_{j=1}^n \frac{\del^2 f}{\del^2 x_j}(\ul{x})
+\]
+
+
+Expressed with the $\nabla$ operator we get the representations
+
+ \begin{align*}
+	\text{grad } f = & \nabla f \\
+	\text{div } \ul{v} = & \nabla \cdot \ul{v}\\
+	\text{curl } \ul{v} = &  \nabla \times \ul{v} \\
+	\Delta =& \nabla \cdot \nabla \\
+\end{align*}
+
+
+\subsection*{Computation Rules for Differential Operators}
+The three operators grad, div and curl are linear. 
+Furthermore
+\begin{align*}
+	\text{grad }(f_1 f_2) = & f_1 \text{grad }( f_2) + f_2 \text{grad }(f_1 )\\
+	\text{grad }F(f) = & F'(f) \text{grad }(f) \\
+	\text{curl } \ul{v}_1 + \ul{v}_2 = &  \text{curl } \ul{v}_1 + \text{curl } \ul{v}_2\\
+	\text{div } (\ul{v}_1 \times \ul{v}_2) = & \ul{v}_2 \cdot \text{curl }\ul{v}_1 - \ul{v}_1 \cdot \text{curl }\ul{v}_2 \\
+\end{align*}
+
+Rules for the interactions between vector- and scalarfields:
+\begin{align*}
+	\text{div } f\ul{v} = &  \ul{v} \text{grad }( f) + f \text{div } \ul{v}\\
+	\text{curl } f \ul{v} = &  f \text{curl }\ul{v}  -  \ul{v} \times \text{grad }(f)\\
+\end{align*}
+
+Rules for the concatenation of the operators:
+\begin{align*}
+	\text{div }\text{curl } \ul{v} = &  0 \\
+	\text{curl }\text{grad } f = &  \ul{0} \\
+	\text{div }\text{grad } f = & \Delta f \\
+	\text{curl }\text{curl } \ul{v} = & \text{grad }  \text{div } \ul{v} - \Delta \ul{v} \\
+	\text{div } (\ul{v}_1 \times \ul{v}_2) = & \ul{v}_2 \cdot \text{curl }\ul{v}_1 - \ul{v}_1 \cdot \text{curl }\ul{v}_2 \\
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
+
+
+\begin{align*}
+	\text{grad }(f_1 f_2) = & f_1 \text{grad }( f_2) + f_2 \text{grad }(f_1 )\\
+	\text{grad }F(f) = & F'(f) \text{grad }(f) \\
+	\text{div } f\ul{v} = &  \ul{v} \text{grad }( f) + f \text{div } \ul{v}\\
+	\text{div } \ul{v} = & \nabla \cdot \ul{v}\\
+	\text{curl } \ul{v}_1 + \ul{v}_2 = &  \text{curl } \ul{v}_1 + \text{curl } \ul{v}_2\\
+	\text{curl } c\ul{v} = &  c \text{curl } \ul{v} \\
+	\text{curl } f \ul{v} = &  f \text{curl }\ul{v}  -  \ul{v} \times \text{grad }(f)\\
+	\text{div }\text{curl } \ul{v} = &  0 \\
+	\text{curl }\text{grad } f = &  \ul{0} \\
+	\text{div }\text{grad } f = & \Delta f \\
+	\text{curl }\text{curl } \ul{v} = & \text{grad }  \text{div } \ul{v} - \Delta \ul{v} \\
+	\text{div } (\ul{v}_1 \times \ul{v}_2) = & \ul{v}_2 \cdot \text{curl }\ul{v}_1 - \ul{v}_1 \cdot \text{curl }\ul{v}_2 \\
+\end{align*}
+
+\end{comment}
+
+1. Wenn $F \wedge G$ eine Tautologie ist, dann ist $F$ eine Tautologie und $G$ auch.
+2. Umgekehrt: Sind $F$ und $G$ Tautologien, dann ist auch $F \wedge G$ eine.
+\emph{Beweis.}
+1. Annahme: $F \wedge G$ sei eine Tautologie.
+Dann: Für jede Belegung $B$ wertet $F \wedge G$ zu wahr aus.
+Dann: Das ist nur der Fall, wenn sowohl $F$ als auch $G$ (für jedes $B$) zu wahr auswerten.
+Dann: Für jede Belegung $B$ wertet $F$ zu wahr aus. Und:
+Für jede Belegung $B$ wertet $G$ zu wahr aus.
+Dann: $F$ ist Tautologie und $G$ ist Tautologie.
+2. Annahme: $F$ ist Tautologie und $G$ ist Tautologie.
+Dann: Für jede Belegung $B_1$ wertet $F$ zu wahr aus. Und: Für jede Belegung $B_2$ wertet $G$ zu wahr aus.
+Dann: Für jede Belegung $B$ wertet $F \wedge G$ zu wahr aus.
+Dann: $F \wedge G$ ist eine Tautologie.
+\subsection*{Äquivalenz und Folgerung}
+$p\equiv q$ gilt genau dann, wenn sowohl $p\models q$ als auch $q\models p$ gelten. \emph{Beweis.}
+$p\equiv q$ GDW $p\Leftrightarrow q$ ist Tautologie nach Def. von $\equiv$
+GDW $(p\Rightarrow q) \wedge (q\Rightarrow p)$ ist Tautologie
+GDW $(p\Rightarrow q)$ ist Tautologie und $(q\Rightarrow p)$ ist Tautologie
+GDW $(p\models q)$ gilt und $q\models p$ gilt.
+\subsection*{Substitution}
+Ersetzt man in einer Formel eine beliebige Teilformel $F$ durch eine logisch äquivalente
+Teilformel $F'$, so verändert sich der Wahrheitswerteverlauf der Gesamtformel nicht.
+Man kann Formeln also vereinfachen, indem man Teilformeln durch äquivalente
+(einfachere) Teilformeln ersetzt.
+\subsection*{Universum}
+Die freien Variablen in einer Aussagenform können durch Objekte aus einer als
+Universum bezeichneten Gesamtheit wie $\mathbb{N},\mathbb{R},\mathbb{Z},\mathbb{Q}$ ersetzt werden.
+\subsection*{Tautologien}
+$(p\wedge q)\Rightarrow p$\text{ bzw. }$p\Rightarrow (p\vee q)$\\
+$(q\Rightarrow p)\vee (\neg q\Rightarrow p)$\\
+$(p\Rightarrow q)\Leftrightarrow (\neg p\vee q)$\\
+$(p\Rightarrow q)\Leftrightarrow (\neg q\Rightarrow\neg p)$ \hfill\text{(Kontraposition)}\\
+$(p\wedge (p\Rightarrow q))\Rightarrow q$ \hfill\text{(Modus Ponens)}\\
+$((p\Rightarrow q)\wedge (q\Rightarrow r))\Rightarrow (p\Rightarrow r)$\\
+$((p\Rightarrow q)\wedge (p\Rightarrow r))\Rightarrow (p\Rightarrow (q\wedge r))$\\
+$((p\Rightarrow q)\wedge (q\Rightarrow p))\Leftrightarrow (p\Leftrightarrow q)$
+\subsection*{Nützliche Äquivalenzen}
+Kommutativität:\\
+$(p \wedge q) \equiv (q \wedge p)$\\
+$(p \vee q) \equiv (q \vee p)$\\
+Assoziativität:\\
+$(p \wedge (q \wedge r)) \equiv ((p \wedge q) \wedge r)$\\
+$(p \vee (q \vee r)) \equiv ((p \vee q) \vee r)$\\
+Distributivität:\\
+$(p \wedge (q \vee r)) \equiv ((p \wedge q) \vee (p \wedge r))$\\
+$(p \vee (q \wedge r)) \equiv ((p \vee q) \wedge (p \vee r))$\\
+Idempotenz:\\
+$(p \wedge p) \equiv p$\\
+$(p \vee p) \equiv p$\\
+Doppelnegation:\\
+$\neg (\neg p) \equiv p$\\
+de Morgans Regeln:\\
+$\neg (p \wedge q) \equiv ((\neg p) \vee (\neg q))$\\
+$\neg (p \vee q) \equiv ((\neg p) \wedge (\neg q))$\\
+Definition Implikation:\\
+$(p \Rightarrow q) \equiv (\neg p \vee q)$\\
+Tautologieregeln:\\
+$(p \wedge q) \equiv p$\hfill (falls $q$ eine Tautologie ist)\\
+$(p \vee q) \equiv q$\\
+Kontradiktionsregeln:\\
+$(p \wedge q) \equiv q$\hfill (falls $q$ eine Kontradiktion ist)\\
+$(p \vee q) \equiv p$\\
+Absorptionsregeln:\\
+$(p \wedge (p \vee q)) \equiv p$\\
+$(p \vee (p \wedge q)) \equiv p$\\
+Prinzip vom ausgeschlossenen Dritten:\\
+$p \vee (\neg p) \equiv w$\\\
+Prinzip vom ausgeschlossenen Widerspruch:\\
+$p \wedge (\neg p) \equiv f$
+\subsection*{Äquivalenzen von quant. Aussagen}
+Negationsregeln:\\
+$\neg\forall x:p(x)\equiv\exists x:(\neg p(x))$\\
+$\neg\exists x:p(x)\equiv\forall x:(\neg p(x))$\\
+Ausklammerregeln:\\
+$(\forall x:p(x)\wedge\forall y:q(y))\equiv\forall z:(p(z)\wedge q(z))$\\
+$(\exists x:p(x)\wedge\exists y:q(y))\equiv\exists z:(p(z)\wedge q(z))$\\
+Vertauschungsregeln\\
+$\forall x\forall y:p(x,y)\equiv\forall y\forall x:p(x,y)$\\
+$\exists x\exists y:p(x,y)\equiv\forall y\exists x:p(x,y)$
+\subsection*{Äquivalenzumformung}
+Wir demonstrieren an der Formel $\neg (\neg p \wedge q) \wedge (p \vee q)$, wie man mit Hilfe der
+aufgelisteten logischen Äquivalenzen tatsächlich zu Vereinfachungen kommen kann:\\
+$\phantom{{}\equiv{}} \neg (\neg p \wedge q) \wedge (p \vee q)$\\
+$\equiv (\neg (\neg p) \vee (\neg q)) \wedge (p \vee q)$\hfill de Morgan\\
+$\equiv (p \vee (\neg q)) \wedge (p \vee q)$\hfill Doppelnegation\\
+$\equiv p \vee ((\neg q) \wedge q)$\hfill Distributivtät v.r.n.l.\\
+$\equiv p \vee (q \wedge (\neg q))$\hfill Kommutativtät\\
+$\equiv p \vee f$\hfill Prinzip v. ausgeschl. Widerspruch\\
+$\equiv p$\hfill Kontradiktionsregel
+
+
+
+
