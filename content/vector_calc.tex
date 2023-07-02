@@ -8,31 +8,32 @@ $\ul{v} : \mathbb{R}^n \to \mathbb{R}^m$
 
 \subsection*{Differentiation of Vector Fields}
 Let $\ul{a}, \ul{b}, \ul{c}$ be vector fields and $\varphi$ be a scalar field, then
-\begin{align*}
+\[
+\begin{aligned}
 	\frac{d}{dt} (\varphi \ul{a})= & \frac{d\varphi}{dt}  \ul{a}+ \varphi \frac{d\ul{a}}{dt}\\
 	\frac{d}{dt} (\ul{a} \cdot \ul{b})= &  \frac{d\ul{a}}{dt} \cdot \ul{b} +  \ul{a} \cdot \frac{d\ul{b}}{dt}\\
 	\frac{d}{dt} (\ul{a} \times \ul{b})= &  \frac{d\ul{a}}{dt} \times \ul{b} +  \ul{a} \times \frac{d\ul{b}}{dt} \\
 	\frac{d}{dt} ( \ul{a}(\varphi(t) ) )= & \frac{d\ul{a}}{d\varphi} \frac{d\varphi}{dt} \\
-\end{align*}
-
+\end{aligned}
+\]
 
 \subsection*{Differential Operators}
 For a scalar field $f : \mathbb{R}^n \to \mathbb{R}, \ul{x} \mapsto f(\ul{x})$ the gradient is
 \[
-	\text{grad } f(\ul{x})  = \colvec{ \frac{\del f}{\del x_1} \\ \vdots \\ \frac{\del f}{\del x_n} } 
+	\grad f(\ul{x})  = \colvec{ \frac{\del f}{\del x_1} \\ \vdots \\ \frac{\del f}{\del x_n} } 
 \]
 and gives the direction of \ul{steepest ascent}
 
 
 For a vector field $\ul{v} : \mathbb{R}^n \to \mathbb{R}^n$ the divergence is defined as 
 \[
-	\text{div } \ul{v}(\ul{x}) = \sum_{j=1}^n \frac{\del v_j}{\del x_j}(\ul{x})
+	\div \ul{v}(\ul{x}) = \sum_{j=1}^n \frac{\del v_j}{\del x_j}(\ul{x})
 \]
 and gives the \ul{source density} at a point
 
 For a vector field $\ul{v} : \mathbb{R}^3 \to \mathbb{R}^3$ the curl is defined as 
 \[
-	\text{curl }(\ul{v}(x,y,z)) = \colvec{ \frac{\del v_3}{\del y} - \frac{\del v_2}{\del z} \\
+	\curl(\ul{v}(x,y,z)) = \colvec{ \frac{\del v_3}{\del y} - \frac{\del v_2}{\del z} \\
 						 \frac{\del v_1}{\del z} - \frac{\del v_3}{\del x}  \\
 						 \frac{\del v_2}{\del x}  - \frac{\del v_1}{\del y} }
 \]
@@ -46,48 +47,134 @@ The Laplace operator for a scalar field $f : \mathbb{R}^n \to \mathbb{R}, \ul{x}
 
 
 Expressed with the $\nabla$ operator we get the representations
-
- \begin{align*}
-	\text{grad } f = & \nabla f \\
-	\text{div } \ul{v} = & \nabla \cdot \ul{v}\\
-	\text{curl } \ul{v} = &  \nabla \times \ul{v} \\
-	\Delta =& \nabla \cdot \nabla \\
-\end{align*}
-
+\[
+ \begin{aligned}
+	\grad f = & \nabla f \\
+	\div \ul{v} = & \nabla \cdot \ul{v}\\
+	\curl \ul{v} = &  \nabla \times \ul{v} \\
+	\Delta = & \nabla \cdot \nabla \\
+\end{aligned}
+\]
 
 \subsection*{Computation Rules for Differential Operators}
 The three operators grad, div and curl are linear. 
-Furthermore
-\begin{align*}
-	\text{grad }(f_1 f_2) = & f_1 \text{grad }( f_2) + f_2 \text{grad }(f_1 )\\
-	\text{grad }F(f) = & F'(f) \text{grad }(f) \\
-	\text{curl } \ul{v}_1 + \ul{v}_2 = &  \text{curl } \ul{v}_1 + \text{curl } \ul{v}_2\\
-	\text{div } (\ul{v}_1 \times \ul{v}_2) = & \ul{v}_2 \cdot \text{curl }\ul{v}_1 - \ul{v}_1 \cdot \text{curl }\ul{v}_2 \\
-\end{align*}
+Rules for one active operator:
+\[
+\begin{aligned}
+	\grad (f_1 f_2) =& f_1 \, \grad f_2 + f_2 \, \grad f_1\\
+	\Leftrightarrow \nabla (f_1 f_2) = & f_1 \, \nabla  f_2 + f_2 \, \nabla f_1\\
+	\\
+	\grad F(f) =& F'(f) \, \grad f \\
+	\Leftrightarrow \nabla F(f) = & F'(f) \, \nabla f \\
+	\\
+	\div (\ul{v}_1 \times \ul{v}_2) =& \ul{v}_2 \cdot \curl \ul{v}_1 - \ul{v}_1 \cdot \curl \ul{v}_2 \\
+	\Leftrightarrow \nabla \cdot (\ul{v}_1 \times \ul{v}_2) = &  \ul{v}_2 \cdot (\nabla \times \ul{v}_1) - \ul{v}_1 \cdot (\nabla \times \ul{v}_2) \\
+\end{aligned}
+\]
 
 Rules for the interactions between vector- and scalarfields:
-\begin{align*}
-	\text{div } f\ul{v} = &  \ul{v} \text{grad }( f) + f \text{div } \ul{v}\\
-	\text{curl } f \ul{v} = &  f \text{curl }\ul{v}  -  \ul{v} \times \text{grad }(f)\\
-\end{align*}
+\[
+\begin{aligned}
+	\div f \ul{v} = &  \ul{v} \, \grad f + f \div \ul{v}\\
+	\Leftrightarrow \nabla \cdot (f\ul{v}) = &  \ul{v} \, \nabla f + f (\nabla \cdot \ul{v})\\
+	\\
+	\curl f \ul{v} = &  f \curl \ul{v}  -  \ul{v} \times \grad f\\
+	\Leftrightarrow \nabla \times (f \ul{v}) = &  f (\nabla \times\ul{v})  -  \ul{v} \times \nabla f\\
+\end{aligned}
+\]
+
 
 Rules for the concatenation of the operators:
-\begin{align*}
-	\text{div }\text{curl } \ul{v} = &  0 \\
-	\text{curl }\text{grad } f = &  \ul{0} \\
-	\text{div }\text{grad } f = & \Delta f \\
-	\text{curl }\text{curl } \ul{v} = & \text{grad }  \text{div } \ul{v} - \Delta \ul{v} \\
-	\text{div } (\ul{v}_1 \times \ul{v}_2) = & \ul{v}_2 \cdot \text{curl }\ul{v}_1 - \ul{v}_1 \cdot \text{curl }\ul{v}_2 \\
-\end{align*}
+\[
+\begin{aligned}
+	\div \curl \ul{v} = &  0 \\
+	\Leftrightarrow \nabla \cdot ( \nabla \times\ul{v} ) = &  0 \\
+	\\
+	\curl \grad f = &  \ul{0} \\
+	\Leftrightarrow \nabla \times \nabla f = & \ul{0}\\
+	\\
+	\div \grad f = & \Delta f \\
+	\Leftrightarrow \nabla \cdot \nabla f = &  \Delta f\\
+	\\
+	\curl \curl \ul{v} = & \grad  \div \ul{v} - \Delta \ul{v} \\
+	\Leftrightarrow \nabla \times (\nabla \times \ul{v}) =  & \nabla  (\nabla \cdot \ul{v}) - \Delta \ul{v}\\
+\end{aligned}
+\]
+
+
+
+\subsection*{Flux ($\Phi$)}
+
+\textbf{Q}: Let be $\ul{v}$ the velocity field of a flow;
+how much fluid flows through a surface $S$ per unit time in direction $\ul{n}$?
+
+\textbf{A}: Split $S$ into infinitesimal area elements $dS$. 
+Because they are infinitesimal, the $dS$ are flat and $\ul{v}$ is homogeneous within a single $dS$.
+The total flow through a single $dS$ is
+\[
+	d\Phi = \ul{v} \cdot \ul{n} dS
+\]
+
+The flux is the “sum” over all infinitesimal $dS$ and thus given by the integral
+\[
+	\Phi = \int_S \ul{v} \cdot \ul{n} dS
+\]
 
 
 
 
 
 
+\begin{comment}
+\subsection*{Exercise}
 
+\[
+\begin{aligned}
+& \text { curl curl }=\text { curl }\left(\begin{array}{l}
+\frac{\partial}{\partial y} v_3-\frac{\partial}{\partial z} v_2 \\
+\frac{\partial}{\partial z} v_1-\frac{\partial}{\partial x} v_3 \\
+\frac{\partial}{\partial x} v_2-\frac{\partial}{\partial y} v_1
+\end{array}\right) \\
+& =\left(\begin{array}{l}
+\frac{\partial}{\partial x} \\
+\frac{\partial}{\partial y} \\
+\frac{\partial}{\partial z}
+\end{array}\right) \times\left(\begin{array}{l}
+\frac{\partial}{\partial y} v_3-\frac{\partial}{\partial z} v_2 \\
+\frac{\partial}{\partial z} v_1-\frac{\partial}{\partial x} v_3 \\
+\frac{\partial}{\partial x} v_2-\frac{\partial}{\partial y} v_1
+\end{array}\right) \\
+& \left.=\left(\begin{array}{l}
+\left(\frac{\partial^2}{\partial x \partial y} v_2-\frac{\partial^2}{\partial y^2} v_1\right)-\left(\frac{\partial^2}{\partial z^2} v_1-\frac{\partial^2}{\partial x \partial z} v_3\right. \\
+\left.\frac{\partial^2}{\partial z \partial y} v_3-\frac{\partial^2}{\partial z^2} v_2\right)-\left(\frac{\partial^2}{\partial x^2} v_2-\frac{\partial^2}{\partial x \partial y} v_1\right. \\
+\left.\frac{\partial^2}{\partial x \partial z} v_1-\frac{\partial^2}{\partial x^2} v_3\right)-\left(\frac{\partial^2}{\partial y^2} v_3-\frac{\partial^2}{\partial y \partial z} v_2\right.
+\end{array}\right)\right) \\
+& =\left(\begin{array}{l}
+\frac{\partial^2}{\partial x \partial y_2} v_2+\frac{\partial^2}{\partial x \partial z} v_3-\frac{\partial^2}{\partial y^2} v_1-\frac{\partial^2}{\partial z^2} v_1+\frac{\partial^2}{\partial x \partial x} v_1-\frac{\partial^2}{\partial x^2} v_1 \\
+\frac{\partial^2}{\partial z \partial y^2} v_3+\frac{\partial^2}{\partial x \partial y} v_1-\frac{\partial^2}{\partial y^2} v_2-\frac{\partial^2}{\partial \partial^2} v_2+\frac{\partial^2}{\partial y \partial y} v_2-\frac{\partial^2}{\partial y^2} v_2 \\
+\frac{\partial^2}{\partial x \partial z} v_1+\frac{\partial^2}{\partial y \partial z} v_2-\frac{\partial^2}{\partial y^2} v_3-\frac{\partial^2}{\partial z^2} v_3+\frac{\partial^2 y}{\partial z \partial z} v_3-\frac{\partial^2}{\partial z^2} v_3
+\end{array}\right) \\
+& =\left(\begin{array}{l}
+\frac{\partial^2}{\partial x \partial y} v_2+\frac{\partial^2}{\partial x \partial z} v_3+\frac{\partial^2}{\partial x^2} v_1-\Delta v_1 \\
+\frac{\partial^2}{\partial z \partial \partial v_3}+\frac{\partial^2}{\partial x \partial y} v_1+\frac{\partial^2}{\partial y^2} v_2-\Delta v_2 \\
+\frac{\partial^2}{\partial x \partial z} v_1+\frac{\partial^2}{\partial y \partial z} v_2+\frac{\partial^2}{\partial z^2} v_3-\Delta v_3
+\end{array}\right) \\
+& =\left(\begin{array}{c}
+\frac{\partial}{\partial x}\left(\frac{\partial}{\partial x} v_1+\frac{\partial}{\partial y} v_2+\frac{\partial}{\partial z} v_3\right) \\
+\frac{\partial}{\partial y}\left(\frac{\partial}{\partial x} v_1+\frac{\partial}{\partial y} v_2+\frac{\partial}{\partial z} v_3\right) \\
+\frac{\partial}{\partial z}\left(\frac{\partial}{\partial x} v_1+\frac{\partial}{\partial y} v_2+\frac{\partial}{\partial z} v_3\right)
+\end{array}\right)-\Delta \mathbf{v} \\
+& =\left(\begin{array}{l}
+\frac{\partial}{\partial x} \\
+\frac{\partial}{\partial y} \\
+\frac{\partial}{\partial z}
+\end{array}\right)\left(\frac{\partial}{\partial x} v_1+\frac{\partial}{\partial y} v_2+\frac{\partial}{\partial z} v_3\right)-\Delta \mathbf{v} \\
+& =\operatorname{grad} d i v \mathbf{v}-\Delta \mathbf{v} \\
+&
+\end{aligned}
+\]
 
-
+\begin{comment}
 
 
 
@@ -104,22 +191,21 @@ Rules for the concatenation of the operators:
 \begin{comment}
 
 
-\begin{align*}
-	\text{grad }(f_1 f_2) = & f_1 \text{grad }( f_2) + f_2 \text{grad }(f_1 )\\
-	\text{grad }F(f) = & F'(f) \text{grad }(f) \\
-	\text{div } f\ul{v} = &  \ul{v} \text{grad }( f) + f \text{div } \ul{v}\\
-	\text{div } \ul{v} = & \nabla \cdot \ul{v}\\
-	\text{curl } \ul{v}_1 + \ul{v}_2 = &  \text{curl } \ul{v}_1 + \text{curl } \ul{v}_2\\
-	\text{curl } c\ul{v} = &  c \text{curl } \ul{v} \\
-	\text{curl } f \ul{v} = &  f \text{curl }\ul{v}  -  \ul{v} \times \text{grad }(f)\\
-	\text{div }\text{curl } \ul{v} = &  0 \\
-	\text{curl }\text{grad } f = &  \ul{0} \\
-	\text{div }\text{grad } f = & \Delta f \\
-	\text{curl }\text{curl } \ul{v} = & \text{grad }  \text{div } \ul{v} - \Delta \ul{v} \\
-	\text{div } (\ul{v}_1 \times \ul{v}_2) = & \ul{v}_2 \cdot \text{curl }\ul{v}_1 - \ul{v}_1 \cdot \text{curl }\ul{v}_2 \\
-\end{align*}
+\begin{aligned}
+	\grad(f_1 f_2) = & f_1 \grad( f_2) + f_2 \grad(f_1 )\\
+	\gradF(f) = & F'(f) \grad(f) \\
+	\div f\ul{v} = &  \ul{v} \grad( f) + f \div \ul{v}\\
+	\div \ul{v} = & \nabla \cdot \ul{v}\\
+	\curl \ul{v}_1 + \ul{v}_2 = &  \curl \ul{v}_1 + \curl \ul{v}_2\\
+	\curl c\ul{v} = &  c \curl \ul{v} \\
+	\curl f \ul{v} = &  f \curl\ul{v}  -  \ul{v} \times \grad(f)\\
+	\div\curl \ul{v} = &  0 \\
+	\curl\grad f = &  \ul{0} \\
+	\div\grad f = & \Delta f \\
+	\curl\curl \ul{v} = & \grad  \div \ul{v} - \Delta \ul{v} \\
+	\div (\ul{v}_1 \times \ul{v}_2) = & \ul{v}_2 \cdot \curl\ul{v}_1 - \ul{v}_1 \cdot \curl\ul{v}_2 \\
+\end{aligned}
 
-\end{comment}
 
 1. Wenn $F \wedge G$ eine Tautologie ist, dann ist $F$ eine Tautologie und $G$ auch.
 2. Umgekehrt: Sind $F$ und $G$ Tautologien, dann ist auch $F \wedge G$ eine.
@@ -211,6 +297,7 @@ $\equiv p \vee (q \wedge (\neg q))$\hfill Kommutativtät\\
 $\equiv p \vee f$\hfill Prinzip v. ausgeschl. Widerspruch\\
 $\equiv p$\hfill Kontradiktionsregel
 
+\end{comment}
 
 
 
