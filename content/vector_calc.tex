@@ -105,7 +105,7 @@ Rules for the concatenation of the operators:
 
 \subsection*{Flux ($\Phi$)}
 
-\textbf{Q}: Let be $\ul{v}$ the velocity field of a flow;
+\textbf{Q}: Let $\ul{v}$ be the velocity field of a flow;
 how much fluid flows through a surface $S$ per unit time in direction $\ul{n}$?
 
 \textbf{A}: Split $S$ into infinitesimal area elements $dS$. 
@@ -119,6 +119,101 @@ The flux is the “sum” over all infinitesimal $dS$ and thus given by the inte
 \[
 	\Phi = \int_S \ul{v} \cdot \ul{n} dS
 \]
+
+
+
+
+
+\subsection*{Work ($W$)}
+
+Another fundamental quantity in modeling is the work (a flow of energy) done by
+a vector field $\ul{v}$ along a line path $L$ with beginning $A$ and end $B$
+
+\textbf{Q}: Let $\ul{v}$ be a force field; how much work is done by $\ul{v}$ moving a point mass
+along L from A to B?
+
+\textbf{A}: Split $L$ into infinitesimal line segments $d\ul{r}$.
+Because they are infinitesimal, the $d\ul{r}$ are straight and $\ul{v}$ is homogeneous within a single $d\ul{r}$.
+The work done by the force field $\ul{v}$ per line segment is
+\[
+	dW = \ul{v} \cdot d\ul{r}
+\]
+
+and the total work correspondingly is
+\[
+	W = \int_L \ul{v} \cdot d\ul{r}
+\]
+
+For parametric curves
+\[
+	L: t \mapsto c(t) \quad \Rightarrow \quad d\ul{r} \simeq \dot{c}(t) dt
+\]
+
+
+
+
+\subsection*{Gauss Theorem}
+Consider a vector field $\ul{v}$ that is defined and continuously differentiable in a closed region $B$ with boundary $\partial B$ and outer unit normal $\ul{n}$.
+
+\[
+	\color{Plum}
+	\oint_{\partial B} \ul{v} \cdot \ul{n} \, dS  =  \int_{B} \div \ul{v}  \, dV =  \int_{B} \nabla \cdot \ul{v}  \, dV
+\]
+
+
+
+\subsection*{Stokes Theorem}
+Consider a vector field $\ul{v}$ that is defined and continuously differentiable in a region $D$.
+Consider further a bounded surface S that is entirely contained in D and has the border line $\partial S$
+$C$ is a path along $\partial S$ such that its sense forms a right-hand screw with the normal onto $S$.
+
+\[
+	\color{Plum}
+	\oint_{C} \ul{v} \cdot d\ul{r}  =  \int_{S} \curl \ul{v}  \cdot \ul{n} \, dS =  \int_{S} (\nabla \times \ul{v})  \cdot \ul{n} \, dS
+\]
+
+
+
+\subsection*{Greens Theorems}
+Obtained by applying Gauss to $\ul{v} = f_1 \nabla f_2$
+
+\[
+\color{Plum}
+\begin{aligned}
+	\int_{B} (f_1 \Delta f_2  + \nabla f_1 \nabla f_2) \, dV = & \oint_{\partial B} f_1 \nabla f_2 \cdot \ul{n} \, dS \\
+	\\
+	\int_{B} (f_1 \Delta f_2  - f_2 \Delta f_1 ) \, dV = &\oint_{\partial B} (f_1 \nabla f_2 -  f_2 \nabla f_1) \cdot \ul{n} \,dS \\
+\end{aligned}
+\]
+
+
+
+\subsection*{Conservative Fields}
+A vector field $\ul{v}$ is called conservative if and only if the work along all possible \ul{paths} from $P$ to $Q$ is equal, for all $P, Q \in \mathbb{R}^n$.
+
+\begin{comment}
+The work does not depend on the specific path chosen, but only on the starting point and end point.
+These points ($P$ and $Q$ above) are hence states of the system, which we earlier identified with the levels of the reservoirs.
+For a conserved quantity, it does hence not matter how the level of a reservoir is reached, but only how large it is.
+\end{comment}
+
+\begin{enumerate}
+	[label=$\bullet$]
+	\item Each gradient field is conservative and vice versa, and thus also called potential field. 
+	\item Each gradient field is vortex free and vice versa, i.e. $\nabla \times \nabla f \equiv 0$ .
+\end{enumerate}
+
+
+The definition is equivalent to
+\[
+\begin{aligned}
+	\ul{v} \text{ conservative} &\Leftrightarrow \curl \ul{v} = \nabla \times v = 0 \\
+	\ul{v} \text{ conservative} &\Leftrightarrow \exists f : \mathbb{R}^n \to \mathbb{R} : \nabla f = \ul{v} \\
+\end{aligned}
+\]
+
+
+
 
 
 
