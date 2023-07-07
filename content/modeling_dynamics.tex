@@ -1,0 +1,164 @@
+\section{Modeling Dynamics}
+
+\subsection*{Modeling Definitions}
+\textbf{System}: potential source of data, defined by boundary, inputs and outputs.
+\textbf{Experiment}: process of extracting datafrom a system \textrightarrow{} observes trajectory of the sys inputs;applies change to the sys inputs and records the reaction in the outputs.
+\textbf{Model}:anything to which the experiment can be applied in order to answer questions about the system \textrightarrow{} model is a sys;not always mathematical;defined on (sys,exp).
+\textbf{Simulation}: exp on a model
+\textbf{Modeling}:process of organizing knowledge about sys.
+
+\subsection*{Continuity assumption}
+
+\textbf{Particles}:modeled by $x_p(t)$ position, $\omega(P,t)$ property.
+\textuptarrow{} P \textrightarrow{} continuous field.
+Averaging volume $V$ \textrightarrow{} concentration $u$. Increasing $V$:
+\begin{comment}
+
+\end{comment}
+\textbf{\lambda (continuum limit)}: dynamic lim; below it, $V$ too small \textrightarrow average strongly fluctuates
+\textbf{$L$ length scale of field variations}: spatiotemporal limit, related to Kuramoto length; above it, space must be taken into accout. If \lambda \textless property \textless $L$ \textrightarrow non-spatial dynamics domain. 
+$\textbf{K_n}=\frac{\lambda}{L}$ Knudsen number
+\textbf{Extensive} property: \lambda \textless value \textless $L$ depends on V, else \textbf{intensive}.
+
+\subsection*{Dimensional analysis}
+\textbf{Dimensional analysis}: technique to analyze sys by estimating orders of magnitude, finding correlations between variables, checking similitude between model and sys and consistency of equations.
+
+All dimensions are power series of 6 \textbf{indipendent dimensions}: mass M, time T, temperature (\theta), charge (C) and luminosity (J).
+
+\textbf{Dimensionless grouping}: algebraic combo of variables that has no dimension.
+Given $n$ indpendent dimensions, $p$ variables \textrightarrow $p-n$ dimensionless groupings.
+
+\textbf{Taylor's Method}:
+\begin{enumerate}[label=$\bullet$]
+	\item determine $p-n$ groupings
+	\item write matrix(variables, indip 					dimensions)
+	\item choose column and row with less non-		zero entries and eliminate them with 			Gaussian elimination (the variables which 		rows are used for Gauss elim must be 			divided by the variable of the eliminated 		row)
+	\item if only one var is left for a 				certain dim, delete it (and the 				corresponding dim)
+	\item repeat gauss elim until all etries 		are 0
+\end{enumerate}
+
+\textbf{Dynamic similitude}: when all dimensionless groupings of model and reality match in value. The model is built s.t. the test results are applicable to reality.
+
+\subsection{Time scales}
+Dynamics \textrightarrow time scales:  \textbf{relevant}, as \textbf{differential equations}; \textbf{slow}, as \textbf{constants}; \textbf{fast}, as \textbf{algebraic terms}
+
+\textbf{Stability}: an integrator is stable if all trajectories of a stable sys remain bounded for $t$ \textrightarrow $\infty$.
+e.g. \textbf{Euler scheme}: $x_{t+1}=x_{t}-hax_{t}=[1-ha]^{t+1}x_0$ stable if \textrightarrow $|x_{t+1}| \textless C$ \textrightarrow $|1-ha| \textless 1$.
+In general: $x_{t+1}=Fx_{t}$ stable if eigenvalues \lambda of F with Re(\lambda) \textless 0 have $|\lambda|$ \textless 1.
+\textbf{Stiffness}: if $\frac{\lambda_{max}}{\lambda_{min}}$ is large.
+
+\subsection{Reservoirs and Flows}
+\textbf{Reservoir} is the storage of a sys, its levels are called \textbf{state variables}. The levels can be only extensive quantities. If all levels are known, the behavior of the sys can be predicted. The levels map the state space.
+\textbf{Flows} connect reservoirs.
+
+\textbf{Modeling steps}:
+\begin{enumerate}[label=$\bullet$]
+	\item define sys boundaries, inputs,       	outputs
+	\item identify reservoirs (relevant t) and 
+	their levels
+	\item formulate algebraiìc equations that 		describe flows
+	\item formulate the balance equations
+	that govern the dynamics of the reservoir 		levels
+	\item simplify equations, non dimensionalize...
+	\item solve equations to obtain level(t)
+	\item parameter identification
+	\item validate model on external data
+\end{enumerate}
+
+\textbf{Casuality diagrams}: a way of visualizing casual relationship in a sys/model. 
+Conventions: 
+\begin{enumerate}[label=$\bullet$]
+	\item reservoir: shaded box
+	\item flow:plain box
+	\item casuality: arrow indicating variable
+	\item sum: node
+\end{enumerate}
+
+\begin{comment}
+
+\subsection{Dynamic similitude example}
+\textbf{Dimensional analysis example}
+
+variables: F=[$MLT_{-2}$], \mu=[$ML_{-1}T_{-1}$], \rho=[$ML_{-3}$], U=[$LT_{-1}$], D=[L]. n=3, p=5. 
+
+$ \begin{bmatrix}
+ & M & L & T \\
+\mu & 1 & -1 & -1 \\
+\rho & 1 & -3 & 0 \\
+U & 0 & 1 & -1 \\
+D & 0 & 1 & 0 \\
+F & 1 & 1 & -2 
+\end{bmatrix}  $ \underrightarrow{\text{R1-R2,R5-R2}}$\begin{bmatrix}
+
+& M & L & T \\
+\frac{\mu}{\rho} & 0 & 2 & -1 \\
+\rho & 1 & -3 & 0 \\
+U & 0 & 1 &-1 \\
+D & 0 & 1 & 0 \\
+\frac{F}{\rho} & 0 & 4 & -2 
+\end{bmatrix}  $ \underrightarrow{\text{delete M col and \rho row}}$\begin{bmatrix}
+
+& L & T \\
+\frac{\mu}{\rho} & 2 & -1 \\
+U & 1 & -1 \\
+D & 1 & 0 \\
+\frac{F}{\rho} & 4 & -2 
+\end{bmatrix}  $ \underrightarrow{\text{R2-R1,R4-2R1}}
+
+\\
+
+$ \begin{bmatrix}
+& L & T \\
+\frac{\mu}{\ro} & 2 & -1 \\
+\frac{\rho U}{\mu} & -1 & 0 \\
+D & 1 & 0 \\
+\frac{\rho F}{\mu^{2}} & 0 & 0 
+\end{bmatrix}  $ \underrightarrow{\text{eliminate T and \frac{\mu}{\rho}}} $ \begin{bmatrix}
+& L \\
+\frac{\rho U}{\mu} & -1\\
+D & 1\\
+\frac{\rho F}{\mu^{2}} & 0 
+\end{bmatrix}  $
+
+\end{comment}
+Navier Stokes: $\rho\pdv[]{u}{t} + \rho u\pdv[]{u}{x} = -\pdv[]{\rho}{x} + \mu\pdv[2]{\mu}{x}$. Sound source L moving at constant velocity U, emitting tone with freq $ \omega$. Fluid density far away from source ($\rho_{\infty}$)
+
+\vspace{1mm}
+
+Dimensionless variables:
+$\overline{x}=\frac{x}{L},\overline{t}=\omega t, \overline{u}=\frac{u}{U}, \overline{\rho}=\frac{\rho}{\rho_{\infty}},\overline{p}=\frac{p}{\rho_{\infty} U^2}$
+
+\vspace{1mm}
+
+Express quantities by the dimensionless quantities:
+  $ \overline{\rho}\rho_{\infty}\pdv[]{\overline{u} U}{\frac{\overline{t}}\omega{}} + \overline{\rho}\rho_{\infty}\overline{u} U\pdv[]{\overline{u} U}{\overline{x} L} = -\pdv[]{\overline{p}\rho_{\infty} U^2}{\overline{x} L} + \mu\pdv[2]{\overline{\mu} U}{\overline{x}^2 L}   \vspace{1mm} \longrightarrow   \rho_{\infty} U\omega\overline{\rho}\pdv[]{\overline{u}}{\overline{t}} +  \frac{\rho_{\infty} U^2}{L} \overline{\rho}\overline{u}\pdv[]{\overline{u}}{\overline{x}} = -\frac{\rho_{\infty} U^2}{L}\pdv[]{\overline{p}}{\overline{x} } + \frac{\mu U}{L^2}\pdv[2]{\overline{\mu}}{\overline{x}}$
+\vspace{1mm}
+
+Assuming a sound source $\overline{U}=10U$, to ensure dynamic similitude: $\overline{\omega}=10\omega$ and $\overline{\rho}=0.1\rho_{\infty}$ or $\overline{\mu}=10\mu$
+
+\subsection{Continuum assumption pseudocode}
+Take averaging volumes of increasing size, centered at the box center and count the number of particles inside:
+
+\begin{algorithm}[H]
+			
+    \caption*{Continuum assumption}
+    \begin{algorithmic}
+			\State Box length L
+			\State Create matrix Particles(nx3) of random values in 				the range (-L,L)
+			\State plot Particles
+			\State Set number of averaging boxes NumAvBoxes, max length of the boxes maxavBoxLen, vector avBoxLen, volume avBoxVol
+            \For{i in NumAvBoxes}
+                
+                    \State  Current particles matrix \										Currparticles=find Particles(i)\textless 								avBoxLen(i)
+                                           
+            \EndFor
+            \State Plot (avBoxVol,size(Currparticles)/avBoxVol)
+				
+    \end{algorithmic}
+			
+\end{algorithm}
+
+
+
+
+
